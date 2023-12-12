@@ -6,6 +6,8 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   
+  <link rel="stylesheet" href="./css/style.css">
+
   <title>Frontend Mentor | Age calculator app</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -16,14 +18,32 @@
 </head>
 <body>
 
-  Day
-  DD
+  <main class="main">
+    <div class="calculator-wrapper">
+      <form action="">
+        <div class="form-field">
+          <label for="age-day" class="">Day</label>
+          <input type="number" id="age-day" name="age-day" class="" min="1" max="31" placeholder="DD">
+        </div>
+        <div class="form-field">
+          <label for="age-month" class="">Month</label>
+          <input type="number" id="age-month" name="age-month" class="" min="1" max="12" placeholder="MM">
+        </div>
+        <div class="form-field">
+          <label for="age-year" class="">Year</label>
+          <input type="number" id="age-year" name="age-year" class="" placeholder="YYYY">
+        </div>
+      </form>
+      <div class="age-result">
+        <p><span class="years"></span> years</p>
+        <p><span class="months"></span> months</p>
+        <p><span class="days"></span> days</p>
+      </div>
+    </div>
+  </main>
 
-  Month
-  MM
-
-  Year
-  YYYY
+  
+  
 
   -- years
   -- months
