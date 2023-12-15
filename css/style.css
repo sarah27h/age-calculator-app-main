@@ -1,39 +1,153 @@
 /* base styles */
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
-    Font-size: 32px;
+    Font-size: 16px;
+    background: #F0F0F0;
 }
 
 /* poppins-regular - latin */
-@font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    src: url('./assets/fonts/fonts/poppins-v20-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+
+
+  .main {
+    padding: 0 1rem;
   }
-  /* poppins-italic - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Poppins';
-    font-style: italic;
-    font-weight: 400;
-    src: url('./assets/fonts/poppins-v20-latin-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+
+  .calculator-wrapper{
+    padding: 3rem 1.5rem;
+    background: #fff;
+    max-width: 840px;
+    border-radius: 1.5rem 1.5rem 6rem;
+    margin: 4rem auto;
   }
-  /* poppins-700 - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Poppins';
-    font-style: normal;
+
+  .form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    justify-content: start;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-label {
+    margin-bottom: 0.5rem;
+    color: #6E6E6E;
+    text-transform: uppercase;
     font-weight: 700;
-    src: url('./assets/fonts/poppins-v20-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    letter-spacing: 3px;
+    font-size: .9rem;
   }
-  /* poppins-800italic - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Poppins';
-    font-style: italic;
+
+  .form-input {
+    height: 3rem;
+    border-radius: 0.5rem;
+    border: .5px solid #dbdbdb;
+    padding-left: 1rem;
+    font-size: 1.3rem;
     font-weight: 800;
-    src: url('./assets/fonts/poppins-v20-latin-800italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    font-family: inherit;
+    color: #141414;
+  }
+
+  .form-input:focus,
+  .form-input:active,
+  .form-input:hover {
+    border: none;
+    outline: 1px solid #854dff;
+  }
+
+  .calculator-divider {
+    position: relative;
+    grid-column: 1/-1;
+}
+
+.form-btn {
+  display: block;
+  margin: 0 auto 2rem;
+  border: none;
+  background: transparent;
+}
+
+.form-btn:hover .calculator-img {
+  cursor: pointer;
+  background-color: #141414;
+  transition: all .5s ease-in-out;
+}
+
+.calculator-img {
+  position: relative;
+  background: #854dff;
+  border-radius: 100%;
+  padding: 1rem;
+  width: 4rem;
+  height: 4rem;
+}
+
+  /* hr Only accept color property */
+  .calculator-hr {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    border: 0;
+    border-top: 2px solid #dbdbdb;
+  }
+
+  .age-result p {
+    font-weight: 800;
+    font-style: italic;
+    font-size: 2rem;
+  }
+
+  .age-result span {
+    color: #854dff;
+  }
+
+  /* media queries */
+
+  @media screen and (min-width: 374px) {
+    .form {
+      grid-template-columns: repeat(3, minmax(88px, 160px));
+      gap: 1rem;
+    }
+
+    .calculator-img {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    .age-result p {
+      font-size: 3rem
+    }
+  }
+
+  @media screen and (min-width: 575px) {
+    .calculator-wrapper {
+      padding: 3.5rem;
+    }
+
+    .form {
+      grid-template-columns: repeat(4, minmax(88px, 160px));
+      grid-row-gap: 0;
+      justify-content: space-between;
+    }
+
+    .form-btn {
+      margin: 0;
+      margin-left: auto;
+    }
+
+    .calculator-img {
+      width: 8rem;
+      height: 8rem;
+    }
   }

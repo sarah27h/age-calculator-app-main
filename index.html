@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400;1,800&display=swap" rel="stylesheet">
+
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   
   <link rel="stylesheet" href="./css/style.css">
@@ -20,35 +24,35 @@
 
   <main class="main">
     <div class="calculator-wrapper">
-      <form action="">
+      <form class="form" action="">
         <div class="form-field">
-          <label for="age-day" class="">Day</label>
-          <input type="number" id="age-day" name="age-day" class="" min="1" max="31" placeholder="DD">
+          <label for="age-day" class="form-label">Day</label>
+          <input type="number" id="age-day" name="age-day" class="form-input" min="1" max="31" placeholder="DD">
         </div>
         <div class="form-field">
-          <label for="age-month" class="">Month</label>
-          <input type="number" id="age-month" name="age-month" class="" min="1" max="12" placeholder="MM">
+          <label for="age-month" class="form-label">Month</label>
+          <input type="number" id="age-month" name="age-month" class="form-input" min="1" max="12" placeholder="MM">
         </div>
         <div class="form-field">
-          <label for="age-year" class="">Year</label>
-          <input type="number" id="age-year" name="age-year" class="" placeholder="YYYY">
+          <label for="age-year" class="form-label">Year</label>
+          <input type="number" id="age-year" name="age-year" class="form-input" min="1" max="12" placeholder="YYYY">
+        </div>
+        <div class="calculator-divider">
+          <hr class="calculator-hr"/>
+          <button class="form-btn">
+            <img class="calculator-img" src="./assets/images/icon-arrow.svg" alt="">
+          </button>
         </div>
       </form>
+      
       <div class="age-result">
-        <p><span class="years"></span> years</p>
-        <p><span class="months"></span> months</p>
-        <p><span class="days"></span> days</p>
+        <p><span class="years">--</span> years</p>
+        <p><span class="months">--</span> months</p>
+        <p><span class="days">--</span> days</p>
       </div>
     </div>
   </main>
 
-  
-  
-
-  -- years
-  -- months
-  -- days
-  
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="https://github.com/sarah27h">Sarah Hassan</a>.
