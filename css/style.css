@@ -15,65 +15,66 @@ body {
 /* poppins-regular - latin */
 
 
-  .main {
-    padding: 0 1rem;
-  }
+.main {
+  padding: 0 1rem;
+}
 
-  .calculator-wrapper{
-    padding: 3rem 1.5rem;
-    background: #fff;
-    max-width: 840px;
-    border-radius: 1.5rem 1.5rem 6rem;
-    margin: 4rem auto;
-  }
+.calculator-wrapper{
+  padding: 3rem 1.5rem;
+  background: #fff;
+  max-width: 840px;
+  border-radius: 1.5rem 1.5rem 6rem;
+  margin: 4rem auto;
+}
 
-  .form {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    justify-content: start;
-  }
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  justify-content: start;
+}
 
-  .form-field {
-    display: flex;
-    flex-direction: column;
-  }
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
 
-  .form-label {
-    margin-bottom: 0.5rem;
-    color: #6E6E6E;
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 3px;
-    font-size: .9rem;
-  }
+.form-label {
+  margin-bottom: 0.5rem;
+  color: #6E6E6E;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 3px;
+  font-size: .9rem;
+}
 
-  .form-input {
-    height: 3rem;
-    border-radius: 0.5rem;
-    border: .5px solid #dbdbdb;
-    padding-left: 1rem;
-    font-size: 1.3rem;
-    font-weight: 800;
-    font-family: inherit;
-    color: #141414;
-  }
+.form-input {
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: .5px solid #dbdbdb;
+  padding-left: 1rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  font-family: inherit;
+  color: #141414;
+}
 
-  .form-input:focus,
-  .form-input:active,
-  .form-input:hover {
-    border: none;
-    outline: 1px solid #854dff;
-  }
+.form-input:focus,
+.form-input:active,
+.form-input:hover {
+  border: none;
+  outline: 1px solid #854dff;
+}
 
-  .calculator-divider {
-    position: relative;
-    grid-column: 1/-1;
+.calculator-divider {
+  position: relative;
+  grid-column: 1/-1;
+  margin-bottom: 2rem;
 }
 
 .form-btn {
   display: block;
-  margin: 0 auto 2rem;
+  margin: 0 auto;
   border: none;
   background: transparent;
 }
@@ -82,6 +83,23 @@ body {
   cursor: pointer;
   background-color: #141414;
   transition: all .5s ease-in-out;
+}
+
+/* feedback messages */
+.js-form-label-error {
+  color: #ff5757;
+}
+
+.js-form-field-error {
+  border: 1px solid #ff5757;
+}
+
+.form-feedback {
+  margin: .5rem;
+  color: #ff5757;
+  font-style: italic;
+  font-weight: 400;
+  font-size: .9rem;
 }
 
 .calculator-img {
@@ -93,61 +111,61 @@ body {
   height: 4rem;
 }
 
-  /* hr Only accept color property */
-  .calculator-hr {
-    position: absolute;
-    width: 100%;
-    top: 50%;
-    border: 0;
-    border-top: 2px solid #dbdbdb;
+/* hr Only accept color property */
+.calculator-hr {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  border: 0;
+  border-top: 2px solid #dbdbdb;
+}
+
+.age-result p {
+  font-weight: 800;
+  font-style: italic;
+  font-size: 2rem;
+}
+
+.age-result span {
+  color: #854dff;
+}
+
+/* media queries */
+
+@media screen and (min-width: 374px) {
+  .form {
+    grid-template-columns: repeat(3, minmax(88px, 160px));
+    gap: 1rem;
+  }
+
+  .calculator-img {
+    width: 4rem;
+    height: 4rem;
   }
 
   .age-result p {
-    font-weight: 800;
-    font-style: italic;
-    font-size: 2rem;
+    font-size: 3rem
+  }
+}
+
+@media screen and (min-width: 575px) {
+  .calculator-wrapper {
+    padding: 3.5rem;
   }
 
-  .age-result span {
-    color: #854dff;
+  .form {
+    grid-template-columns: repeat(4, minmax(88px, 160px));
+    grid-row-gap: 0;
+    justify-content: space-between;
   }
 
-  /* media queries */
-
-  @media screen and (min-width: 374px) {
-    .form {
-      grid-template-columns: repeat(3, minmax(88px, 160px));
-      gap: 1rem;
-    }
-
-    .calculator-img {
-      width: 4rem;
-      height: 4rem;
-    }
-
-    .age-result p {
-      font-size: 3rem
-    }
+  .form-btn {
+    margin: 0;
+    margin-left: auto;
   }
 
-  @media screen and (min-width: 575px) {
-    .calculator-wrapper {
-      padding: 3.5rem;
-    }
-
-    .form {
-      grid-template-columns: repeat(4, minmax(88px, 160px));
-      grid-row-gap: 0;
-      justify-content: space-between;
-    }
-
-    .form-btn {
-      margin: 0;
-      margin-left: auto;
-    }
-
-    .calculator-img {
-      width: 8rem;
-      height: 8rem;
-    }
+  .calculator-img {
+    width: 8rem;
+    height: 8rem;
   }
+}

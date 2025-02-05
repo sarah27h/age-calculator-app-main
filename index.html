@@ -24,18 +24,21 @@
 
   <main class="main">
     <div class="calculator-wrapper">
-      <form class="form" action="">
+      <form class="form js-age-form" action="">
         <div class="form-field">
-          <label for="age-day" class="form-label">Day</label>
-          <input type="number" id="age-day" name="age-day" class="form-input" min="1" max="31" placeholder="DD">
+          <label for="age-day" class="form-label js-form-label">Day</label>
+          <input type="number" id="age-day" name="age-day" class="form-input js-form-input" placeholder="DD">
+          <p hidden class="form-feedback js-form-feedback"></p>
         </div>
         <div class="form-field">
-          <label for="age-month" class="form-label">Month</label>
-          <input type="number" id="age-month" name="age-month" class="form-input" min="1" max="12" placeholder="MM">
+          <label for="age-month" class="form-label js-form-label">Month</label>
+          <input type="number" id="age-month" name="age-month" class="form-input js-form-input" placeholder="MM">
+          <p hidden class="form-feedback js-form-feedback"></p>
         </div>
         <div class="form-field">
-          <label for="age-year" class="form-label">Year</label>
-          <input type="number" id="age-year" name="age-year" class="form-input" min="1" max="12" placeholder="YYYY">
+          <label for="age-year" class="form-label js-form-label">Year</label>
+          <input type="number" id="age-year" name="age-year" class="form-input js-form-input" placeholder="YYYY">
+          <p hidden class="form-feedback js-form-feedback"></p>
         </div>
         <div class="calculator-divider">
           <hr class="calculator-hr"/>
@@ -57,5 +60,6 @@
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="https://github.com/sarah27h">Sarah Hassan</a>.
   </div>
+  <script src="js/script.js"></script>
 </body>
 </html>
