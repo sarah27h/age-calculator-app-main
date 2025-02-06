@@ -17,68 +17,80 @@ const currentDate = () => {
 const {currentYear, currentMonth, currentDay} = currentDate();
 
 const daysInMonth = (year, month) => {
+    // to improve UX because 
+    // set year default to a leap year
+    // after user enter 29 and february
+    // without entering year yet year value will be 0
+    // so it will set it to the current year
+    // and throw error for user before he enter his year value
+    // daysInMonth(0, 2)
+    if (year === 0) year = 2024;
+
     // no 0th day in any month, JavaScript 
     // automatically adjusts this to 
     // the last day of the previous month
     return ((new Date(year, month, 0)).getDate());
 }
 
-const dayInput = document.getElementById('age-day');
+const dayInputField = document.getElementById('age-day');
+let dayInputValue = Number(dayInputField.value);
 const dayInputValidation = () => {
-    if (dayInput.value == '') {
-        formFeedbacks[0].textContent = "This field is require";
-        formFeedbacks[0].removeAttribute('hidden');
-        formLabels[0].classList.add('js-form-label-error');
-    } else if (!(dayInput.value >= 1 &&  dayInput.value <= 31  && dayInput.value <= daysInMonth(yearInput.value, monthInput.value))) {
-        formFeedbacks[0].textContent = "Must be a valid day";
-        formFeedbacks[0].removeAttribute('hidden');
-        formLabels[0].classList.add('js-form-label-error');
-    } else {
-        formFeedbacks[0].setAttribute('hidden', 'hidden');
-        formLabels[0].classList.remove('js-form-label-error');
-    }
+    dayInputValue = Number(dayInputField.value);
+    inputValidation(dayInputValue, 0);
 }
 
-const yearInput = document.getElementById('age-year');
+const yearInputField = document.getElementById('age-year');
+let yearInputValue = Number(yearInputField.value);
 const yearInputValidation = () => {
-    if (yearInput.value == '') {
-        formFeedbacks[2].textContent = "This field is require";
-        formFeedbacks[2].removeAttribute('hidden');
-        formLabels[2].classList.add('js-form-label-error');
-    } else if ((yearInput.value > currentYear) && yearInput.value > 0) {
-        formFeedbacks[2].textContent = "Must be a valid year";
-        formFeedbacks[2].removeAttribute('hidden');
-        formLabels[2].classList.add('js-form-label-error');
-    } else {
-        daysInMonth(yearInput.value, monthInput.value);
-        dayInputValidation();
-        formFeedbacks[2].setAttribute('hidden', 'hidden');
-        formLabels[2].classList.remove('js-form-label-error');
-    }
+    yearInputValue = Number(yearInputField.value);
+    inputValidation(yearInputValue, 2);
+    dayInputValidation();
 }
 
-const monthInput = document.getElementById('age-month');
+const monthInputField = document.getElementById('age-month');
+let monthInputValue = Number(monthInputField.value);
 const monthInputValidation = () => {
-     if (monthInput.value == '') {
-        formFeedbacks[1].textContent = "This field is require";
-        formFeedbacks[1].removeAttribute('hidden');
-        formLabels[1].classList.add('js-form-label-error');
-    } else if (!(monthInput.value >= 1 && monthInput.value <= 12)) {
-        formFeedbacks[1].textContent = "Must be a valid month";
-        formFeedbacks[1].removeAttribute('hidden');
-        formLabels[1].classList.add('js-form-label-error');
-    } else {
-        formFeedbacks[1].setAttribute('hidden', 'hidden');
-        formLabels[1].classList.remove('js-form-label-error');
-    }
+    monthInputValue = Number(monthInputField.value);
+    inputValidation(monthInputValue, 1);
+    dayInputValidation();
 }
 
+const inputValidation = (userInput, feedbackId) => {
+    let condition;
+    switch(feedbackId) {
+        case 0:
+            condition = !(userInput >= 1 &&  userInput <= 31  && userInput <= daysInMonth(yearInputValue, monthInputValue));
+            errorWord = "day";
+            break;
+        case 1:
+            condition = !(userInput >= 1 && userInput <= 12);
+            errorWord = "month";
+            break;
+        case 2:
+            condition = (userInput > currentYear) && userInput > 0;
+            errorWord = "year";
+            break;
 
+    }
+    if (userInput === '') {
+        formFeedbacks[feedbackId].textContent = "This field is require";
+        formFeedbacks[feedbackId].removeAttribute('hidden');
+        formLabels[feedbackId].classList.add('js-form-label-error');
+    } else if (condition) {
+        formFeedbacks[feedbackId].textContent = `Must be a valid ${errorWord}`;
+        formFeedbacks[feedbackId].removeAttribute('hidden');
+        formLabels[feedbackId].classList.add('js-form-label-error');
+    } else {
+        formFeedbacks[feedbackId].setAttribute('hidden', 'hidden');
+        formLabels[feedbackId].classList.remove('js-form-label-error');
+    }
+
+}
 
 // listen to user inputs
-dayInput.addEventListener('input', dayInputValidation);
-monthInput.addEventListener('input', monthInputValidation);
-yearInput.addEventListener('input', yearInputValidation);
+dayInputField.addEventListener('input', dayInputValidation);
+monthInputField.addEventListener('input', monthInputValidation);
+yearInputField.addEventListener('input', yearInputValidation);
 
 // listen to form submit
 ageCalculatorForm.addEventListener('submit', (e) => {
@@ -102,6 +114,27 @@ ageCalculatorForm.addEventListener('submit', (e) => {
         }
     } )
 })
+
+
+// calculate age
+const calculateDays = (currentDate, birthDate) => {
+    let ageDays = (currentDate - birthDate) / (1000 * 60 * 60 * 24);
+
+    console.log(currentDate)
+    console.log(birthDate)
+    console.log(Math.floor(ageDays))
+    return ageDays
+}
+
+ageCalculatorForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    calculateDays(
+        new Date(`${currentYear}-${currentMonth + 1}-${currentDay}`),
+        new Date(`${yearInputValue}-${monthInputValue}-${dayInputValue}`),
+    )
+})
+
+
 
 /* write difference between using children & childNodes
 ** document.querySelector('.js-age-form').children >> element nodes >> return object (HTMLCollection is an array-like object)
