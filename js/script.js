@@ -17,15 +17,6 @@ const currentDate = () => {
 const {currentYear, currentMonth, currentDay} = currentDate();
 
 const daysInMonth = (year, month) => {
-    // to improve UX because 
-    // set year default to a leap year
-    // after user enter 29 and february
-    // without entering year yet year value will be 0
-    // so it will set it to the current year
-    // and throw error for user before he enter his year value
-    // daysInMonth(0, 2)
-    if (year === 0) year = 2024;
-
     // no 0th day in any month, JavaScript 
     // automatically adjusts this to 
     // the last day of the previous month
@@ -55,11 +46,28 @@ const monthInputValidation = () => {
     dayInputValidation();
 }
 
+
 const inputValidation = (userInput, feedbackId) => {
     let condition;
     switch(feedbackId) {
         case 0:
-            condition = !(userInput >= 1 &&  userInput <= 31  && userInput <= daysInMonth(yearInputValue, monthInputValue));
+            // to improve UX because 
+            
+            // using this condition userInput <= daysInMonth(yearInputValue, monthInputValue)
+            // without checking there are a values for month or year
+            // cause throw month error
+
+            // eg.
+            // after user enter 29 and february (2)
+            // without entering year yet year value will be 0
+            // so it will set it to the current year (2025) not a leap year
+            // and throw an error for user before he enter his year value
+            // daysInMonth(0, 2)
+
+            // adding this part (monthValue && yearValue && userInput) 
+            // prevent calling func before adding year value 
+            condition = !(userInput >= 1 &&  userInput <= 31  && 
+                (monthValue && yearValue && userInput <= daysInMonth(yearInputValue, monthInputValue)));
             errorWord = "day";
             break;
         case 1:
@@ -116,23 +124,7 @@ ageCalculatorForm.addEventListener('submit', (e) => {
 })
 
 
-// calculate age
-const calculateDays = (currentDate, birthDate) => {
-    let ageDays = (currentDate - birthDate) / (1000 * 60 * 60 * 24);
 
-    console.log(currentDate)
-    console.log(birthDate)
-    console.log(Math.floor(ageDays))
-    return ageDays
-}
-
-ageCalculatorForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    calculateDays(
-        new Date(`${currentYear}-${currentMonth + 1}-${currentDay}`),
-        new Date(`${yearInputValue}-${monthInputValue}-${dayInputValue}`),
-    )
-})
 
 
 
