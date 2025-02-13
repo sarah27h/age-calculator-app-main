@@ -24,25 +24,26 @@ const daysInMonth = (year, month) => {
 }
 
 const dayInputField = document.getElementById('age-day');
-let dayInputValue = Number(dayInputField.value);
+let dayInputValue
 const dayInputValidation = () => {
-    dayInputValue = Number(dayInputField.value);
-    inputValidation(dayInputValue, 0);
+    dayInputValue = dayInputField.value;
+    // check validation only if there is an input
+    dayInputValue ? inputValidation(Number(dayInputValue), 0) : 'koko';
 }
 
 const yearInputField = document.getElementById('age-year');
-let yearInputValue = Number(yearInputField.value);
+let yearInputValue
 const yearInputValidation = () => {
-    yearInputValue = Number(yearInputField.value);
-    inputValidation(yearInputValue, 2);
+    yearInputValue = yearInputField.value;
+    yearInputValue ? inputValidation(Number(yearInputValue), 2) : null;
     dayInputValidation();
 }
 
 const monthInputField = document.getElementById('age-month');
-let monthInputValue = Number(monthInputField.value);
+let monthInputValue
 const monthInputValidation = () => {
-    monthInputValue = Number(monthInputField.value);
-    inputValidation(monthInputValue, 1);
+    monthInputValue = monthInputField.value;
+    monthInputValue ? inputValidation(Number(monthInputValue), 1) : null;
     dayInputValidation();
 }
 
@@ -64,27 +65,28 @@ const inputValidation = (userInput, feedbackId) => {
             // and throw an error for user before he enter his year value
             // daysInMonth(0, 2)
 
-            // adding this part (monthValue && yearValue && userInput) 
-            // prevent calling func before adding year value 
-            condition = !(userInput >= 1 &&  userInput <= 31  && 
-                (monthValue && yearValue && userInput <= daysInMonth(yearInputValue, monthInputValue)));
+            // adding this part (monthInputValue && yearInputValue && userInput) 
+            // prevent calling func before adding year value
+            console.log('userInput', userInput, typeof userInput)
+            condition = (userInput < 1 ||  userInput > 31  || (monthInputValue && yearInputValue && userInput > daysInMonth(yearInputValue, monthInputValue)));
             errorWord = "day";
             break;
         case 1:
-            condition = !(userInput >= 1 && userInput <= 12);
+            condition = (userInput < 1 || userInput > 12);
             errorWord = "month";
             break;
         case 2:
-            condition = (userInput > currentYear) && userInput > 0;
+            condition = (userInput > currentYear) || userInput <= 0;
             errorWord = "year";
             break;
 
     }
-    if (userInput === '') {
-        formFeedbacks[feedbackId].textContent = "This field is require";
-        formFeedbacks[feedbackId].removeAttribute('hidden');
-        formLabels[feedbackId].classList.add('js-form-label-error');
-    } else if (condition) {
+    // if (userInput === '') {
+    //     formFeedbacks[feedbackId].textContent = "This field is require";
+    //     formFeedbacks[feedbackId].removeAttribute('hidden');
+    //     formLabels[feedbackId].classList.add('js-form-label-error');
+    // } 
+    if (condition) {
         formFeedbacks[feedbackId].textContent = `Must be a valid ${errorWord}`;
         formFeedbacks[feedbackId].removeAttribute('hidden');
         formLabels[feedbackId].classList.add('js-form-label-error');
