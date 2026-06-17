@@ -27,15 +27,16 @@ const dayInputField = document.getElementById('age-day');
 let dayInputValue
 const dayInputValidation = () => {
     dayInputValue = dayInputField.value;
-    // check validation only if there is an input
-    dayInputValue ? inputValidation(Number(dayInputValue), 0) : 'koko';
+    inputValidation(dayInputValue, 0);
+    console.log('after condition inside func', dayInputValue, typeof dayInputValue);
 }
 
 const yearInputField = document.getElementById('age-year');
 let yearInputValue
 const yearInputValidation = () => {
     yearInputValue = yearInputField.value;
-    yearInputValue ? inputValidation(Number(yearInputValue), 2) : null;
+    if (yearInputValue) inputValidation(yearInputValue, 2);
+    inputValidation(yearInputValue, 2);
     dayInputValidation();
 }
 
@@ -43,13 +44,14 @@ const monthInputField = document.getElementById('age-month');
 let monthInputValue
 const monthInputValidation = () => {
     monthInputValue = monthInputField.value;
-    monthInputValue ? inputValidation(Number(monthInputValue), 1) : null;
+    inputValidation(monthInputValue, 1);
     dayInputValidation();
 }
 
 
 const inputValidation = (userInput, feedbackId) => {
     let condition;
+    // userInput = Number(userInput);
     switch(feedbackId) {
         case 0:
             // to improve UX because 
@@ -67,7 +69,6 @@ const inputValidation = (userInput, feedbackId) => {
 
             // adding this part (monthInputValue && yearInputValue && userInput) 
             // prevent calling func before adding year value
-            console.log('userInput', userInput, typeof userInput)
             condition = (userInput < 1 ||  userInput > 31  || (monthInputValue && yearInputValue && userInput > daysInMonth(yearInputValue, monthInputValue)));
             errorWord = "day";
             break;
@@ -81,20 +82,19 @@ const inputValidation = (userInput, feedbackId) => {
             break;
 
     }
-    // if (userInput === '') {
-    //     formFeedbacks[feedbackId].textContent = "This field is require";
-    //     formFeedbacks[feedbackId].removeAttribute('hidden');
-    //     formLabels[feedbackId].classList.add('js-form-label-error');
-    // } 
-    if (condition) {
+    if (userInput === '') {
+        formFeedbacks[feedbackId].setAttribute('hidden', 'hidden');
+        formLabels[feedbackId].classList.remove('js-form-label-error');
+    } 
+    else if(condition) {
         formFeedbacks[feedbackId].textContent = `Must be a valid ${errorWord}`;
         formFeedbacks[feedbackId].removeAttribute('hidden');
         formLabels[feedbackId].classList.add('js-form-label-error');
+        console.log('inside condition', userInput, typeof userInput)
     } else {
         formFeedbacks[feedbackId].setAttribute('hidden', 'hidden');
         formLabels[feedbackId].classList.remove('js-form-label-error');
     }
-
 }
 
 // listen to user inputs
@@ -131,11 +131,14 @@ ageCalculatorForm.addEventListener('submit', (e) => {
 
 
 /* write difference between using children & childNodes
-** document.querySelector('.js-age-form').children >> element nodes >> return object (HTMLCollection is an array-like object)
+
+** document.querySelector('.js-age-form').children >> element nodes >> 
+return object (HTMLCollection is an array-like object)
 ** HTMLCollection is an array-like object but it does not have forEach method
 ** Array.from(toggleButton).forEach((el) => {})
 
-** document.querySelector('.js-age-form').childNodes >> all nodes, element, text, comment, .... >> returns a live NodeList of child nodes
+** document.querySelector('.js-age-form').childNodes >> all nodes, element, text, comment, .... >> 
+returns a live NodeList of child nodes
 
 ** loop over 
 ** document.querySelector('.js-age-form').children
@@ -156,6 +159,27 @@ in condition comparing if statement
 false
 فكان بيدخل فيها لان هي الاولانية
 احمد ؟؟؟؟؟؟؟؟؟؟؟
+*/
+
+/* 
+عندي مشكلتين قابلوني
+لما باحول ال 
+input fields value to number
+في حالة ادخال صفر
+ بيتعامل معاه جوه الشرط على انه رقم وبيطلع الخطأ
+ولما بامسح بيتعامل معاه بردو انه صفر جوه الشرط و بيطلع خطأ
+ويسيب الخطأ موجود مع ان الحقل فاضي
+
+الحل و عايزة اسأل احمد
+ضفيت شرط لما يكون الحقل فاضي يشيل الخطأ
+اني شيلت التحويل لرقم و خليته يتعامل معاه على انه نص
+و لما يحب يعمل 
+
+validation
+هيحوله هو جوه الشرط باستخدام مبدأ 
+
+type coercion
+
 */
 
 
