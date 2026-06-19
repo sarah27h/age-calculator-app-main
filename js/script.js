@@ -9,12 +9,13 @@ const currentDate = () => {
     const currentDate = new Date();
     return {
         currentYear: currentDate.getFullYear(), 
-        currentMonth: currentDate.getMonth(), 
+        currentMonth: currentDate.getMonth() + 1, 
         currentDay: currentDate.getDate()
     }
 }
 
-const {currentYear, currentMonth, currentDay} = currentDate();
+let {currentYear, currentMonth, currentDay} = currentDate();
+console.log(currentYear, currentMonth, currentDay);
 
 const daysInMonth = (year, month) => {
     // no 0th day in any month, JavaScript 
@@ -122,13 +123,60 @@ ageCalculatorForm.addEventListener('submit', (e) => {
         } else {
             
         }
-    } )
+    })
+    calculateAgeDays();
+    calculateAgeMonths();
+    calculateAgeYears();
+    calculateAge();
 })
 
 
+// calculate age in days
+const calculateAgeDays = () => {
+    let ageInDays;
+    if(currentDay >= dayInputValue) {
+        ageInDays = currentDay - dayInputValue;
+    } else if (currentDay < dayInputValue) {
+        let daysOfCurrentMonth = daysInMonth(currentYear, currentMonth);
+        ageInDays = currentDay + daysOfCurrentMonth - dayInputValue;
+        currentMonth--;
+        console.log('daysOfCurrentMonth', daysOfCurrentMonth);
+    }
+    return ageInDays;
+}
 
+// calculate age in months
+const calculateAgeMonths = () => {
+    let ageInMonths;
+    if(currentMonth >= monthInputValue) {
+        ageInMonths = currentMonth - monthInputValue;
+    } else  {
+        console.log('in month function');
+        ageInMonths = currentMonth + 12 - monthInputValue;
+        currentYear--;
+    }
+    console.log('ageInMonths', ageInMonths);
+    return ageInMonths;
+}
 
+// calculate age in months
+const calculateAgeYears = () => {
+    let ageInYears;
+    ageInYears = currentYear - yearInputValue;
+    
+    console.log('ageInYears', ageInYears);
+    return ageInYears;
+}
 
+// grab age result spans
+const ageResult = document.querySelectorAll('.age-result span');
+
+// calculate age & display it
+const calculateAge = () => {
+    ageResult[0].textContent = calculateAgeYears();
+    ageResult[1].textContent = calculateAgeMonths();
+    ageResult[2].textContent = calculateAgeDays();
+}
 
 /* write difference between using children & childNodes
 
